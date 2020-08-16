@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EditorConfigFiles Update="C:\Users\jeliknes\source\repos\QueryEvaluationInterceptor\QueryEvaluationInterceptor\.editorconfig">
+    <EditorConfigFiles Update=".editorconfig">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EditorConfigFiles>
   </ItemGroup>
