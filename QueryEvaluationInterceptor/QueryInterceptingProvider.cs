@@ -15,9 +15,6 @@ namespace QueryEvaluationInterceptor
     public class QueryInterceptingProvider<T> :
         CustomQueryProvider<T>, IQueryInterceptingProvider<T>
     {
-        private readonly Stack<IQueryInterceptor> interceptors =
-            new Stack<IQueryInterceptor>();
-
         /// <summary>
         /// The transformation to apply.
         /// </summary>
@@ -56,14 +53,6 @@ namespace QueryEvaluationInterceptor
             }
 
             var childProvider = new QueryInterceptingProvider<TElement>(Source);
-            if (transformation != null)
-            {
-                childProvider.RegisterInterceptor(transformation);
-            }
-            else
-            {
-                interceptors.Push(childProvider);
-            }
 
             return new QueryHost<TElement>(
                 expression, childProvider);
@@ -78,12 +67,6 @@ namespace QueryEvaluationInterceptor
             if (this.transformation != null)
             {
                 throw new InvalidOperationException();
-            }
-
-            while (interceptors.Count > 0)
-            {
-                var child = interceptors.Pop();
-                child.RegisterInterceptor(transformation);
             }
 
             this.transformation = transformation;
